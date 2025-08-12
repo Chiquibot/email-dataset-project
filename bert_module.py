@@ -1,8 +1,8 @@
 from transformers import pipeline
 
-# Initialize sentiment-analysis or other task pipeline once
-sentiment_analyzer = pipeline("sentiment-analysis")
+emotion_classifier = pipeline("text-classification", model="bhadresh-savani/bert-base-uncased-emotion")
 
 def analyze_email_body(text: str) -> str:
-    result = sentiment_analyzer(text)
-    return result[0]['label']  # e.g., 'POSITIVE', 'NEGATIVE'
+    result = emotion_classifier(text)
+    label = result[0]['label']
+    return label.upper()
